@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# 발랑 - BALLANG
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+발랑은 유데미 풀스택 부트캠프 1기에서 만든 명품 쇼핑몰입니다.
 
-## Available Scripts
+## 요구사항
 
-In the project directory, you can run:
+1. 필수 기술스택
 
-### `npm start`
+   - React (CRA)
+   - React Router
+   - Context API (인증 정보 한정)
+   - Redux (Toolkit, 장바구니와 프로필 정보 한정)
+   - 스타일링은 다음 중 하나 또는 그 이상의 조합으로 구성.
+     - Tailwind CSS
+     - CSS in JS (Styled Components)
+     - CSS Module (Sass 사용 가능)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. 다음의 페이지들이 있어야 합니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+   1. HomePage
 
-### `npm test`
+      - 홈페이지에서는 모든 상품의 목록을 볼 수 있어야 합니다.
+      - 상품을 장바구니에 추가할 수 있습니다. 추가 버튼을 누르면 1개가 추가됩니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   2. ProductDetailPage
 
-### `npm run build`
+      - 상품 상세 페이지에서는 상품에 대한 상세 정보를 볼 수 있어야 합니다.
+      - 상품을 장바구니에 추가할 수 있습니다. 수량을 정해서 추가할 수 있습니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   3. MyPage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+      - 마이페이지에서는 로그인한 유저의 정보를 볼 수 있습니다
+      - 마이페이지에서는 로그인한 유저의 정보를 수정할 수 있습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   4. SignInPage
 
-### `npm run eject`
+      - 아이디와 패스워드를 입력하여 로그인 할 수 있어야 합니다.
+      - 로그인 후에는 자동으로 HomePage로 이동하여야 합니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   5. CartPage :
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+      - 카트에 추가된 상품들은 카트 페이지에서 목록으로 볼 수 있습니다.
+      - 카트 페이지 내 목록에서는 상품을 카트에서 제거할 수 있습니다.
+      - 카트 페이지 내 목록에서는 상품이 담긴 수량을 조정할 수 있습니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. 다음과 같은 레이아웃 구성이 있어야 합니다.
+   1. Layout 컴포넌트를 사용해서 전체 페이지에서 Header와 Footer가 보여야 합니다.
+   2. 로그인을 했을 경우에는 Header에서, 로그인한 사용자의 아이디와 로그아웃 버튼이 보여야 합니다.
+   3. 로그인을 하지 않았을 경우에는 SignInPage로 이동시켜주는 로그인하기 버튼이 보여야 합니다.
+   4. Header에는 마이페이지 링크와 장바구니페이지 링크가 있어야 합니다.
