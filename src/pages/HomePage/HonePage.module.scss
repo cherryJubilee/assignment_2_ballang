@@ -1,0 +1,8 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px; /* 필요에 따라 조정 */
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 20px;
+}
