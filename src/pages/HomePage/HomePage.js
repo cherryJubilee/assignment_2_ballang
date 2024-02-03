@@ -23,7 +23,9 @@ function HomePage() {
   return (
     <div className={styles.wrapper}>
       {products.map((product) => (
-        <ProductsListItem key={product.id} product={product} />
+        <div key={product.id} className={styles.productItem}>
+          <ProductsListItem product={product} />
+        </div>
       ))}
     </div>
   );

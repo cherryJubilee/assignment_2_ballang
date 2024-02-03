@@ -6,21 +6,24 @@ import MyPage from "./pages/MyPage";
 import SignInPage from "./pages/SignInPage";
 import CartPage from "./pages/CartPage";
 import AuthLayout from "./layouts/AuthLayout";
+import { AuthProvider } from "./contexts/auth.context";
 
 function App() {
   return (
-    <Routes>
-      <Route element={<DefaultLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products/:productId" element={<ProductDetailPage />} />
-        <Route path="/my-page" element={<MyPage />} />
-        <Route path="/cart" element={<CartPage />} />
-      </Route>
+    <AuthProvider>
+      <Routes>
+        <Route element={<DefaultLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products/:productId" element={<ProductDetailPage />} />
+          <Route path="/my-page" element={<MyPage />} />
+          <Route path="/cart" element={<CartPage />} />
+        </Route>
 
-      <Route element={<AuthLayout />}>
-        <Route path="/sign-in" element={<SignInPage />} />
-      </Route>
-    </Routes>
+        <Route element={<AuthLayout />}>
+          <Route path="/sign-in" element={<SignInPage />} />
+        </Route>
+      </Routes>
+    </AuthProvider>
   );
 }
 

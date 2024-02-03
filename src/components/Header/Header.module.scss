@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap");
+
 .topHeader {
   height: 30px;
   display: flex;
@@ -45,8 +47,13 @@
       color: #999999;
     }
   }
-  .logo {
+  .logo,
+  a {
     font-size: 60px;
+    text-decoration: none;
+    color: #000;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
   }
   .add {
     display: flex;

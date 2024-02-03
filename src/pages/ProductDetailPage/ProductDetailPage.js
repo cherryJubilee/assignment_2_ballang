@@ -12,7 +12,6 @@ function ProductDetailPage() {
       setProduct(data);
     });
   }, [productId]);
-  console.log("ProductDetailPage의 데이터 들어오나요", product);
 
   if (product === null) return null;
 

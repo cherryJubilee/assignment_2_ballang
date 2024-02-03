@@ -10,14 +10,23 @@ const AuthContext = createContext(initialValue);
 
 export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
 
-  const signIn = () => setIsLoggedIn(true);
-  const logOut = () => setIsLoggedIn(false);
+  const signIn = (username) => {
+    setIsLoggedIn(true);
+    setUsername(username);
+  };
+
+  const logOut = () => {
+    setIsLoggedIn(false);
+    setUsername("");
+  };
 
   const value = {
     isLoggedIn,
     signIn,
     logOut,
+    username,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

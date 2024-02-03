@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./ProductsDetailItem.module.scss";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/reducers/cartSlice";
 
 function ProductDetailItem({ product }) {
+  const dispatch = useDispatch();
+
   // 상품금액
   const formattedCustomerPrice =
     product.goods_consumer.toLocaleString("ko-KR") + "원";
@@ -20,6 +24,11 @@ function ProductDetailItem({ product }) {
   const arrivalDate = new Date(today.setDate(today.getDate() + 5));
   const options = { month: "2-digit", day: "2-digit", weekday: "short" };
   const formattedDate = arrivalDate.toLocaleDateString("ko-KR", options);
+
+  // 장바구니 추가
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -78,7 +87,7 @@ function ProductDetailItem({ product }) {
             </select>
             <div className={styles.buyBtn}>
               <button>BUY NOW</button>
-              <button>
+              <button onClick={handleAddToCart}>
                 <img src="/bag.png" alt="cart"></img>
               </button>
             </div>
