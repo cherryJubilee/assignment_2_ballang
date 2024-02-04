@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import styles from "./ProductListItem.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/reducers/cartSlice";
+import { useAuth } from "../../contexts/auth.context";
 
 function ProductsListItem({ product }) {
+  const navigate = useNavigate();
+
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
+  const { isLoggedIn } = useAuth();
 
   const formattedPrice = product.price.toLocaleString("ko-KR") + "원";
   // 장바구니 추가
   const handleAddToCart = () => {
-    dispatch(addToCart({ product, quantity: 1 }));
-    setShowModal(true);
+    if (!isLoggedIn) {
+      navigate("/sign-in");
+    } else {
+      dispatch(addToCart({ product, quantity: 1 }));
+      setShowModal(true);
+    }
   };
 
   const closeModal = () => {
