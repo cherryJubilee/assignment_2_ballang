@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./ProductsDetailItem.module.scss";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/reducers/cartSlice";
@@ -15,7 +15,6 @@ function ProductDetailItem({ product }) {
   // 최대혜택가
   const rawPrice = product.goods_price;
   const formattedPrice = product.goods_price.toLocaleString("ko-KR") + "원";
-
   // 적립금 계산
   const reward = Math.floor((rawPrice / 100) * 0.01) * 100;
   const formattedReward = reward.toLocaleString("ko-KR") + "원";
@@ -28,6 +27,13 @@ function ProductDetailItem({ product }) {
   const discountRate = Math.round(
     (1 - product.goods_price / product.goods_consumer) * 100
   );
+
+  // -,+ 버튼 기능
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQuantityChange = (newQuantity) => {
+    setQuantity(Math.max(1, newQuantity));
+  };
 
   // 장바구니 추가
   const handleAddToCartWithQuantity = (quantity) => {
@@ -90,18 +96,18 @@ function ProductDetailItem({ product }) {
                 <option key={index}>{option.size}</option>
               ))}
             </select>
-            <secion className={styles.qtyWrapper}>
+            <section className={styles.qtyWrapper}>
               <h4>구매수량</h4>
               <div className={styles.quantityBox}>
-                <button>
+                <button onClick={() => handleQuantityChange(quantity - 1)}>
                   <img src="/minus.png" alt="수량 감소" />
                 </button>
-                <input type="text" value="1" title="구매수량" />
-                <button>
+                <input type="text" value={quantity} title="구매수량" />
+                <button onClick={() => handleQuantityChange(quantity + 1)}>
                   <img src="/plus.png" alt="수량 증가" />
                 </button>
               </div>
-            </secion>
+            </section>
 
             <div className={styles.buyBtn}>
               <button>BUY NOW</button>

@@ -1,0 +1,143 @@
+.wrapper {
+  font-size: 13px;
+  padding-top: 60px;
+  margin: 0 auto;
+  width: 70%;
+  min-height: 400px;
+  display: flex;
+  justify-content: space-between;
+
+  .products {
+    width: 65%;
+  }
+
+  .product {
+    display: flex;
+    margin-bottom: 20px;
+    border: 2px solid #efefef;
+    border-radius: 5px;
+    padding: 20px;
+    input {
+      margin-right: 10px;
+    }
+
+    .productImg img {
+      width: 120px;
+      height: 120px;
+      margin-right: 25px;
+    }
+
+    .productDetails {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    .productInfo {
+      .itemName {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 7px;
+        font-size: 16px;
+        font-weight: 700;
+        span {
+          margin-bottom: 5px;
+        }
+
+        a {
+          color: #333;
+          text-decoration: none;
+          font-size: 15px;
+        }
+      }
+
+      .optionInfo {
+        .cntCtrl {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+
+          button {
+            border: none;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+
+            img {
+              width: 7px;
+            }
+          }
+
+          input {
+            font-size: 14px;
+            border: none;
+            text-align: center;
+            width: 55px;
+            height: 18px;
+            color: #000;
+            border-bottom: 1px solid #ddd;
+            border-top: 1px solid #ddd;
+            padding: 0;
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .productActions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .optionPrice {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 600;
+      }
+
+      .btnArea {
+        display: flex;
+        button {
+          border: none;
+          background-color: white;
+        }
+        > span {
+          margin: 0 5px;
+        }
+      }
+    }
+  }
+
+  .prices {
+    background-color: #eeeeee;
+    width: 28%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 55px;
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .price {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .btn {
+      background-color: #000;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 5px;
+      font-weight: 700;
+    }
+  }
+}
