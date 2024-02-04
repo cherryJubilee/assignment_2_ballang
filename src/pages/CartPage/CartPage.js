@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./CartPage.module.scss";
 import { removeFromCart, updateQuantity } from "../../store/reducers/cartSlice";
 import { Link } from "react-router-dom";
+import QuantitySelector from "../../components/QuantitySelector";
 
-function CartPage({ product }) {
+function CartPage() {
+  const formattedPrices = useSelector((state) => state.cart.formattedPrices);
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const [selectedItems, setSelectedItems] = useState({});
@@ -67,35 +69,15 @@ function CartPage({ product }) {
                     <span>{item.option.size}</span>
                   </div>
 
-                  <div className={styles.optionInfo}>
-                    <div className={styles.cntCtrl}>
-                      <button
-                        onClick={() =>
-                          handleQuantityUpdate(item.id, item.quantity - 1)
-                        }
-                      >
-                        <img src="/minus.png" alt="수량 감소" />
-                      </button>
-                      <input
-                        type="text"
-                        value={item.quantity}
-                        onChange={(e) =>
-                          handleQuantityUpdate(
-                            item.id,
-                            parseInt(e.target.value)
-                          )
-                        }
-                      />
-                      <button
-                        onClick={() =>
-                          handleQuantityUpdate(item.id, item.quantity + 1)
-                        }
-                      >
-                        <img src="/plus.png" alt="수량 증가" />
-                      </button>
-                    </div>
-                  </div>
+                  <QuantitySelector
+                    quantity={item.quantity}
+                    setQuantity={(newQuantity) =>
+                      handleQuantityUpdate(item.id, newQuantity)
+                    }
+                  />
                 </div>
+
+                {/* <div>{item.option.size}여긴 옵션 자리야!!</div> */}
 
                 <div className={styles.productActions}>
                   <div className={styles.btnArea}>
@@ -105,9 +87,12 @@ function CartPage({ product }) {
                     <span>|</span>
                     <button>바로주문</button>
                   </div>
-                  <div className={styles.optionPrice}>{`${(
-                    item.price * item.quantity
-                  ).toLocaleString("ko-KR")}원`}</div>
+                  <div className={styles.optionPrice}>
+                    {formattedPrices[item.id] ||
+                      `${(item.price * item.quantity).toLocaleString(
+                        "ko-KR"
+                      )}원`}
+                  </div>
                 </div>
               </div>
             </div>
@@ -118,9 +103,7 @@ function CartPage({ product }) {
       <section className={styles.prices}>
         <div>
           <h3>총 상품금액</h3>
-          <div className={styles.price}>
-            {totalPrice.toLocaleString("ko-KR")}원
-          </div>
+          <div className={styles.price}></div>
         </div>
         <div>
           <h3>배송비</h3>

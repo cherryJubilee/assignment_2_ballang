@@ -51,41 +51,6 @@
           font-size: 15px;
         }
       }
-
-      .optionInfo {
-        .cntCtrl {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-
-          button {
-            border: none;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #ddd;
-
-            img {
-              width: 7px;
-            }
-          }
-
-          input {
-            font-size: 14px;
-            border: none;
-            text-align: center;
-            width: 55px;
-            height: 18px;
-            color: #000;
-            border-bottom: 1px solid #ddd;
-            border-top: 1px solid #ddd;
-            padding: 0;
-            margin: 0;
-          }
-        }
-      }
     }
 
     .productActions {

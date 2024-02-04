@@ -3,10 +3,10 @@ import Styles from "./Footer.module.scss";
 
 function Footer() {
   return (
-    <div class={Styles.wrapper}>
-      <section class={Styles.content}>
+    <div className={Styles.wrapper}>
+      <section className={Styles.content}>
         <div>
-          <ul class={Styles.menu}>
+          <ul className={Styles.menu}>
             <li>
               <a href="http://balaanofficial.com">회사소개</a>
             </li>
@@ -23,7 +23,7 @@ function Footer() {
               <a href="/">개인정보처리방침</a>
             </li>
           </ul>
-          <div class={Styles.footArea}>
+          <div className={Styles.footArea}>
             <ul>
               <li>주식회사 발란</li>
               <li>대표: 최형록</li>
@@ -43,8 +43,8 @@ function Footer() {
             </a>
           </div>
         </div>
-        <div class={Styles.contentRight}>
-          <ul class={Styles.navList}>
+        <div className={Styles.contentRight}>
+          <ul className={Styles.navList}>
             <li>MY ORDER</li>
             <li>
               <a href="/cart">주문내역</a>
@@ -53,7 +53,7 @@ function Footer() {
               <a href="/">쇼핑백</a>
             </li>
           </ul>
-          <ul class={Styles.navList}>
+          <ul className={Styles.navList}>
             <li> CUSTOMER SERVICE</li>
             <li>
               <a href="/t">발란머니 내역</a>

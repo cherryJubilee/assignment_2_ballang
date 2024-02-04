@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import styles from "./ProductsDetailItem.module.scss";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/reducers/cartSlice";
+import { formatPrice } from "../../utils/util";
+import QuantitySelector from "../../components/QuantitySelector";
 
 function ProductDetailItem({ product }) {
   const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(product.quantity || 1);
+  const [selectedOption, setSelectedOption] = useState("");
+  const navigate = useNavigate();
 
   // 상품금액
-  const formattedCustomerPrice =
-    product.goods_consumer.toLocaleString("ko-KR") + "원";
+  const formattedCustomerPrice = formatPrice(product.goods_consumer);
   // 판매가
-  const formattedStandardPrice =
-    product.standard_price.toLocaleString("ko-KR") + "원";
+  const formattedStandardPrice = formatPrice(product.standard_price);
   // 최대혜택가
   const rawPrice = product.goods_price;
-  const formattedPrice = product.goods_price.toLocaleString("ko-KR") + "원";
+  const formattedPrice = formatPrice(product.goods_price);
   // 적립금 계산
   const reward = Math.floor((rawPrice / 100) * 0.01) * 100;
-  const formattedReward = reward.toLocaleString("ko-KR") + "원";
+  const formattedReward = formatPrice(reward);
   // 도착 날짜 계산
   const today = new Date();
   const arrivalDate = new Date(today.setDate(today.getDate() + 5));
@@ -28,16 +32,18 @@ function ProductDetailItem({ product }) {
     (1 - product.goods_price / product.goods_consumer) * 100
   );
 
-  // -,+ 버튼 기능
-  const [quantity, setQuantity] = useState(1);
-
-  const handleQuantityChange = (newQuantity) => {
-    setQuantity(Math.max(1, newQuantity));
+  const handleQuantityUpdate = (newQuantity) => {
+    setQuantity(newQuantity);
   };
 
   // 장바구니 추가
-  const handleAddToCartWithQuantity = (quantity) => {
-    dispatch(addToCart({ product, quantity }));
+  const handleAddToCart = () => {
+    if (!selectedOption) {
+      alert("옵션을 선택해주세요.");
+      return;
+    }
+    dispatch(addToCart({ product, quantity, option: selectedOption }));
+    navigate("/cart");
   };
 
   return (
@@ -90,28 +96,32 @@ function ProductDetailItem({ product }) {
             <div>
               <h4>옵션선택</h4>
             </div>
-            <select className={styles.optionList}>
-              <option value="">옵션 (옵션명)</option>
+            <select
+              className={styles.optionList}
+              value={selectedOption}
+              onChange={(e) => setSelectedOption(e.target.value)}
+            >
+              <option>옵션 (옵션명)</option>
               {product.option.map((option, index) => (
-                <option key={index}>{option.size}</option>
+                <option key={index} value={option.size}>
+                  {option.size}
+                </option>
               ))}
             </select>
+
             <section className={styles.qtyWrapper}>
               <h4>구매수량</h4>
               <div className={styles.quantityBox}>
-                <button onClick={() => handleQuantityChange(quantity - 1)}>
-                  <img src="/minus.png" alt="수량 감소" />
-                </button>
-                <input type="text" value={quantity} title="구매수량" />
-                <button onClick={() => handleQuantityChange(quantity + 1)}>
-                  <img src="/plus.png" alt="수량 증가" />
-                </button>
+                <QuantitySelector
+                  quantity={quantity}
+                  setQuantity={handleQuantityUpdate}
+                />
               </div>
             </section>
 
             <div className={styles.buyBtn}>
               <button>BUY NOW</button>
-              <button onClick={handleAddToCartWithQuantity}>
+              <button onClick={handleAddToCart}>
                 <img src="/bag.png" alt="cart"></img>
               </button>
             </div>
