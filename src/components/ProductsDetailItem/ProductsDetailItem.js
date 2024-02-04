@@ -24,10 +24,14 @@ function ProductDetailItem({ product }) {
   const arrivalDate = new Date(today.setDate(today.getDate() + 5));
   const options = { month: "2-digit", day: "2-digit", weekday: "short" };
   const formattedDate = arrivalDate.toLocaleDateString("ko-KR", options);
+  // 할인율 계산
+  const discountRate = Math.round(
+    (1 - product.goods_price / product.goods_consumer) * 100
+  );
 
   // 장바구니 추가
-  const handleAddToCart = () => {
-    dispatch(addToCart(product));
+  const handleAddToCartWithQuantity = (quantity) => {
+    dispatch(addToCart({ product, quantity }));
   };
 
   return (
@@ -53,9 +57,10 @@ function ProductDetailItem({ product }) {
               <span>판매가</span>
               <p>{formattedStandardPrice}</p>
             </div>
-            <div>
-              <span>최대혜택가</span>
+            <div className={styles.flexContainer}>
+              <span className={styles.container}>최대혜택가</span>
               <p>{formattedPrice}</p>
+              <span className={styles.discountRate}>{discountRate}%</span>
             </div>
             <div>
               <span>적립금</span>
@@ -85,9 +90,22 @@ function ProductDetailItem({ product }) {
                 <option key={index}>{option.size}</option>
               ))}
             </select>
+            <secion className={styles.qtyWrapper}>
+              <h4>구매수량</h4>
+              <div className={styles.quantityBox}>
+                <button>
+                  <img src="/minus.png" alt="수량 감소" />
+                </button>
+                <input type="text" value="1" title="구매수량" />
+                <button>
+                  <img src="/plus.png" alt="수량 증가" />
+                </button>
+              </div>
+            </secion>
+
             <div className={styles.buyBtn}>
               <button>BUY NOW</button>
-              <button onClick={handleAddToCart}>
+              <button onClick={handleAddToCartWithQuantity}>
                 <img src="/bag.png" alt="cart"></img>
               </button>
             </div>
