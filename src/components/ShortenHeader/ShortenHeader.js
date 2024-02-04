@@ -3,7 +3,7 @@ import styles from "./ShortenHeader.module.scss";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/auth.context";
 
-function Header() {
+function ShortenHeader() {
   const { isLoggedIn, logOut, username } = useAuth();
   return (
     <header>
@@ -41,8 +41,14 @@ function Header() {
           </ul>
         </nav>
       </section>
+
+      <section className={styles.logoWrapper}>
+        <Link to="/" className={styles.logo}>
+          BALLANG
+        </Link>
+      </section>
     </header>
   );
 }
 
-export default Header;
+export default ShortenHeader;

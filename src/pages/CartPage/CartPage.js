@@ -10,7 +10,8 @@ function CartPage() {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const [selectedItems, setSelectedItems] = useState({});
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalProductPrice, setTotalProductPrice] = useState(0);
+  const [totalPaymentPrice, setTotalPaymentPrice] = useState(0);
 
   const handleRemove = (id) => {
     dispatch(removeFromCart({ id }));
@@ -24,19 +25,21 @@ function CartPage() {
   };
 
   useEffect(() => {
-    const newTotal = Object.entries(selectedItems).reduce(
-      (acc, [id, isChecked]) => {
-        if (isChecked) {
-          const item = cartItems.find((item) => item.id === id);
-          if (item) {
-            return acc + item.price * item.quantity;
-          }
+    let newTotalProductPrice = 0;
+    let newTotalPaymentPrice = 0;
+
+    Object.entries(selectedItems).forEach(([id, isChecked]) => {
+      if (isChecked) {
+        const item = cartItems.find((item) => item.id === id);
+        if (item) {
+          newTotalProductPrice += item.goods_consumer * item.quantity;
+          newTotalPaymentPrice += item.standard_price * item.quantity;
         }
-        return acc;
-      },
-      0
-    );
-    setTotalPrice(newTotal);
+      }
+    });
+
+    setTotalProductPrice(newTotalProductPrice);
+    setTotalPaymentPrice(newTotalPaymentPrice);
   }, [selectedItems, cartItems]);
 
   return (
@@ -65,8 +68,7 @@ function CartPage() {
                 <div className={styles.productInfo}>
                   <div className={styles.itemName}>
                     <span>{item.brand.name}</span>
-                    <Link to={`products/${item.id}`}>{item.goodsnm}</Link>
-                    <span>{item.option.size}</span>
+                    <Link to={`/products/${item.id}`}>{item.goodsnm}</Link>
                   </div>
 
                   <QuantitySelector
@@ -77,7 +79,7 @@ function CartPage() {
                   />
                 </div>
 
-                {/* <div>{item.option.size}여긴 옵션 자리야!!</div> */}
+                <div>옵션: {item.option}</div>
 
                 <div className={styles.productActions}>
                   <div className={styles.btnArea}>
@@ -103,7 +105,9 @@ function CartPage() {
       <section className={styles.prices}>
         <div>
           <h3>총 상품금액</h3>
-          <div className={styles.price}></div>
+          <div className={styles.price}>
+            {totalProductPrice.toLocaleString("ko-KR")}원
+          </div>
         </div>
         <div>
           <h3>배송비</h3>
@@ -111,8 +115,8 @@ function CartPage() {
         </div>
         <div>
           <h3>결제금액</h3>
-          <div className={styles.price}>
-            {totalPrice.toLocaleString("ko-KR")}원
+          <div className={styles.priceTotal}>
+            {totalPaymentPrice.toLocaleString("ko-KR")}원
           </div>
         </div>
         <button className={styles.btn}>선택 상품 구매하기</button>

@@ -54,7 +54,6 @@ function Header() {
         </div>
         <div className={styles.add}>
           <div className={styles.search}></div>
-          <img className={styles.cart} src="/bag.png" alt="바구니 아이콘" />
         </div>
       </section>
 

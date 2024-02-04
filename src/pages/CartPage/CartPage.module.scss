@@ -2,13 +2,13 @@
   font-size: 13px;
   padding-top: 60px;
   margin: 0 auto;
-  width: 70%;
+  width: 65%;
   min-height: 400px;
   display: flex;
   justify-content: space-between;
 
   .products {
-    width: 65%;
+    width: 60%;
   }
 
   .product {
@@ -17,21 +17,17 @@
     border: 2px solid #efefef;
     border-radius: 5px;
     padding: 20px;
-    input {
-      margin-right: 10px;
-    }
 
     .productImg img {
       width: 120px;
       height: 120px;
-      margin-right: 25px;
+      margin: 0 25px 0 10px;
     }
 
     .productDetails {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      flex: 1;
     }
 
     .productInfo {
@@ -48,14 +44,13 @@
         a {
           color: #333;
           text-decoration: none;
-          font-size: 15px;
+          font-size: 13px;
         }
       }
     }
 
     .productActions {
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
       align-items: center;
       .optionPrice {
@@ -69,9 +64,10 @@
         button {
           border: none;
           background-color: white;
+          padding: 0;
         }
         > span {
-          margin: 0 5px;
+          margin: 0 10px;
         }
       }
     }
@@ -94,6 +90,11 @@
     .price {
       font-size: 13px;
       font-weight: 600;
+    }
+    .priceTotal {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ff2828;
     }
     .btn {
       background-color: #000;

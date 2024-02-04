@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/auth.context";
 import styles from "./SignInPage.module.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignInPage() {
   const { isLoggedIn, signIn } = useAuth();
@@ -24,9 +24,6 @@ function SignInPage() {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.logo}>
-        <Link to="/">BALLANG</Link>
-      </div>
       {isLoggedIn ? null : (
         <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
           <input

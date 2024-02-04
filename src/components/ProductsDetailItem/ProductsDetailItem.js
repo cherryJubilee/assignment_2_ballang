@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ProductsDetailItem.module.scss";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/reducers/cartSlice";
 import { formatPrice } from "../../utils/util";
@@ -10,7 +10,7 @@ function ProductDetailItem({ product }) {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(product.quantity || 1);
   const [selectedOption, setSelectedOption] = useState("");
-  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
 
   // 상품금액
   const formattedCustomerPrice = formatPrice(product.goods_consumer);
@@ -41,9 +41,14 @@ function ProductDetailItem({ product }) {
     if (!selectedOption) {
       alert("옵션을 선택해주세요.");
       return;
+    } else {
+      dispatch(addToCart({ product, quantity, option: selectedOption }));
+      setShowModal(true);
     }
-    dispatch(addToCart({ product, quantity, option: selectedOption }));
-    navigate("/cart");
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -55,7 +60,7 @@ function ProductDetailItem({ product }) {
 
         <div className={styles.infoContent}>
           <div className={styles.infoHeader}>
-            <h2>{product.brand.name}</h2>
+            <h2 className={styles.brand}>{product.brand.name}</h2>
             <span>{product.goodsnm}</span>
             <span>| 발란코드 [{product.id}]</span>
           </div>
@@ -127,6 +132,19 @@ function ProductDetailItem({ product }) {
             </div>
           </div>
         </div>
+        {showModal && (
+          <div className={styles.modal}>
+            <div className={styles.modalContent}>
+              <p>장바구니에 담았습니다.</p>
+              <div className={styles.btns}>
+                <button onClick={closeModal}>쇼핑 계속하기</button>
+                <Link to="/cart">
+                  <button onClick={closeModal}>장바구니 가기</button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       <section className={styles.detailInfo}>

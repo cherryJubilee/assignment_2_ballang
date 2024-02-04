@@ -1,5 +1,4 @@
 // 장바구니 상태를 관리 : 장바구니에 상품을 추가하고, 제거하는 기능
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -38,8 +37,17 @@ const cartSlice = createSlice({
         item.quantity = action.payload.quantity;
       }
     },
+    // 가격 정보 업데이트
+    updateFormattedPrices(state, action) {
+      state.formattedPrices = action.payload;
+    },
   },
 });
 
-export const { addToCart, removeFromCart, updateQuantity } = cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  updateQuantity,
+  updateFormattedPrices,
+} = cartSlice.actions;
 export default cartSlice.reducer;

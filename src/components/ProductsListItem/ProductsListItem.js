@@ -7,7 +7,6 @@ import { useAuth } from "../../contexts/auth.context";
 
 function ProductsListItem({ product }) {
   const navigate = useNavigate();
-
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const { isLoggedIn } = useAuth();

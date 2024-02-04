@@ -15,12 +15,12 @@ function App() {
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/products/:productId" element={<ProductDetailPage />} />
-          <Route path="/my-page" element={<MyPage />} />
           <Route path="/cart" element={<CartPage />} />
         </Route>
 
         <Route element={<AuthLayout />}>
           <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/my-page" element={<MyPage />} />
         </Route>
       </Routes>
     </AuthProvider>
